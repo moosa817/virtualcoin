@@ -1,0 +1,107 @@
+<!-- blockchain_explorer.html -->
+
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .hash-txt {
+        font-size: 10px;
+    }
+
+    .block-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .block-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        border: 1px solid #dee2e6;
+        padding: 15px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+
+    .block-card::after {
+        content: '➡️';
+        position: absolute;
+        top: 0;
+        left: 100%;
+        top: 50%;
+        transform: translateX(-50%);
+    }
+
+    .card-content {
+        flex-grow: 1;
+    }
+
+    .hash-section {
+        margin-top: auto;
+    }
+
+    .hash-txt {
+        font-size: 10px;
+    }
+
+    .arrow-container {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 100%;
+    }
+
+    .arrow {
+        position: absolute;
+        top: 50%;
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #007bff;
+        transform-origin: top;
+    }
+
+</style>
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Blockchain Explorer</h2>
+    <div class="block-row">
+        {% for block in blocks %}
+        <div class="block-card">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="text-center">
+                        Block #{{ block.index }}
+                    </strong>
+                    <div class="hash-txt">
+                        <strong>Previous Hash:</strong> {{ block.previous_hash }}
+                    </div>
+                </div>
+                <div class="card-body card-content">
+                    <h5 class="card-title">Transactions:</h5>
+                    <ul class="list-group">
+                        {% for transaction in block.transactions.all %}
+                        <li class="list-group-item">
+                            <strong>Sender:</strong> {{ transaction.sender.username }}<br>
+                            <strong>Recipient:</strong> {{ transaction.recipient.username }}<br>
+                            <strong>Amount:</strong> {{ transaction.amount }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="card-footer text-xs hash-section">
+                    <div class="hash-txt">
+                        <strong>Current Hash:</strong> {{ block.hash }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

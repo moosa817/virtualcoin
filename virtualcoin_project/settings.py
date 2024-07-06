@@ -16,11 +16,53 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+SYSTEM_PRIVATE_KEY = """-----BEGIN RSA PRIVATE KEY-----
+MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDPWvkzPH3j1xuE
+cUlBfgt8YGaBsSfLUyJVph6f6jeqZ5t3DARG3lXIBWB6rGTfv7K8MDVcSIALUPoQ
+zCygZD8BbnY1faQ5yOD2ATyvcIaNeoMjMemJBD+/6Y+RF6svYTbVvv43d1kXIco6
+4KlF4JryijCJR/C2mVI6+YL6TeUJ2duUuAVrDYc9Rk3hfcpqdEjT8DgL5la4xiq5
+twEqnXKYDCikkm1AfzTfZkpFh2iJXsck7XW/7uUQVStXOh4B5naFv0HzMFtVu5qm
+ctt+T0slyY3Aa6IIu3/mBGwxG7/lJbaFIdivyAsyPECzx6TqApcKBa4CVNl7bcrq
+tcmHBPOVAgMBAAECggEAXOHe490SdTdbe6m1S1F3OqkB8dFVxoXASQZnDHIBqmLL
+qHlpBwe7/COwcnL7oqB/oz2jAWn2dVs6EMEsslIFSRJegBp+MGYzou6t7NZmZ0R8
+Lo1Ck54kIkawiSlFhK0yv29U96qN7Uc1C8er+4GfVsqg8DWZ9WlbhNBUo+O1l4HA
+xc+f5k5a8icL/nRQXfoXiLh4u7IfvrmJ+hPkPFPZGL5NZ3ubaZUi21U9QlMc636H
+Cz6/yl75KUy4rKtlEkBlLIzIOIv+Ca7s753um9QvRhVe9laZ6dZCALIuwLIP1Ieo
+wqES+4nnK6UeQqmL107oN44XLsrR7R4/idChCbgK9wKBgQD1A/xRa9uwiWJcoynT
+4oMEEhQumtrpZOkNb9FAz+3k2c+xUQruKKYxJ7B7ijib9F5ErECzte4VsrHpJ7XJ
+eUbSBndk7qCaljakAyGydyRrwnmaIDt345MmYFeawT6qCXHtX6LyiYRHSMhJfoD0
+X1qdLhw+q0qSqjOH3qf3pHdddwKBgQDYpsQjZEQeZ++XbYdbsHdo6eLTe5SB9zhh
+VTNCgimGwL+gzoIn+HH3XHEZTJPU+pT02ZYWyX8FFvXERd3dWvJO4GZok3TOYqFS
+MoCnZJCJz/0ll3rz7B23cgs61SXtMbqetwTBhvhtlGaKnFb2Oj0sQSTlrBuD0kAu
+gpEh+W0KUwKBgAzwcfHG1WpERxqHT10uOCcN4Vz4tpjeyGP6RL28fV65lftSQVaE
+dQphgzNzADxUMmpEAoK7F+CzeCvM+g+yxOewibud0oN3bVlKBQyMuDKsqYlXLGzP
+auT674VvsSR/rTGQ/GT8mCy/jjw7XwoIwxtL5Rf2KdEHBgOl4Y71c4xPAoGAdB9W
+q72XQVDmO5zqWzvHlQUfncj0PYD7yDe5hOFtTpvLWm61lqT0uOfkevHvns08v8xM
+RSR1H45B5pSoKXgQvjRKz6yRg/mbjAojqRUe368KeXaq4UjiWKwY1szeSjdIVr+0
+HeKxD1Lmb08C0XE/zpOQKkZIbSxpWESFc9dUGZ8CgYAg6q9NxND2HCogD9U4SZ0b
+2WAQ+rS7LYy3z0l/Zb2vAmvhW9Ad6ZesZGEbgYVzF4g2jmbJBpseiOY4E8NQY8Vn
+21R8Dlhv9Zf83XNkyGXq2OTCXYrGnwzhuihoe1v4MqKF2cCZ5vACTA9DZDpZD6mS
+51A0DKH2Pw4HVdZ9mvY9bg==
+-----END RSA PRIVATE KEY-----
+"""
+
+
+SYSTEM_PUBLIC_KEY = """-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAz1r5Mzx949cbhHFJQX4L
+fGBmgbEny1MiVaYen+o3qmebdwwERt5VyAVgeqxk37+yvDA1XEiAC1D6EMwsoGQ/
+AW52NX2kOcjg9gE8r3CGjXqDIzHpiQQ/v+mPkRerL2E21b7+N3dZFyHKOuCpReCa
+8oowiUfwtplSOvmC+k3lCdnblLgFaw2HPUZN4X3KanRI0/A4C+ZWuMYqubcBKp1y
+mAwopJJtQH8032ZKRYdoiV7HJO11v+7lEFUrVzoeAeZ2hb9B8zBbVbuapnLbfk9L
+JcmNwGuiCLt/5gRsMRu/5SW2hSHYr8gLMjxAs8ek6gKXCgWuAlTZe23K6rXJhwTz
+lQIDAQAB
+-----END PUBLIC KEY-----
+"""
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-e2r)l+h&dh9qv+qbn)kvr*vw_*(-z1$%0*kcij7)q)+fh#+b!+'
+SECRET_KEY = "django-insecure-e2r)l+h&dh9qv+qbn)kvr*vw_*(-z1$%0*kcij7)q)+fh#+b!+"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,53 +73,56 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'coinapp'
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "coinapp",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'virtualcoin_project.urls'
+AUTH_USER_MODEL = "coinapp.CustomUser"
+
+
+ROOT_URLCONF = "virtualcoin_project.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'virtualcoin_project.wsgi.application'
+WSGI_APPLICATION = "virtualcoin_project.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
@@ -87,16 +132,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -104,21 +149,20 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

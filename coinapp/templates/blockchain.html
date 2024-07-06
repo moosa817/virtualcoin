@@ -1,6 +1,8 @@
 <!-- blockchain_explorer.html -->
 
 {% extends 'base.html' %}
+
+{% block title %}Blockchain Explorer{% endblock %}
 {% block content %}
 <style>
     .hash-txt {
@@ -21,15 +23,12 @@
         padding: 15px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         position: relative;
+        cursor: pointer;
     }
 
-    .block-card::after {
-        content: '➡️';
-        position: absolute;
-        top: 0;
-        left: 100%;
-        top: 50%;
-        transform: translateX(-50%);
+    .block-card.highlight {
+        border-color: #007bff;
+        box-shadow: 0px 0px 20px rgba(0, 123, 255, 0.5);
     }
 
     .card-content {
@@ -70,7 +69,7 @@
     <h2 class="text-center mb-4">Blockchain Explorer</h2>
     <div class="block-row">
         {% for block in blocks %}
-        <div class="block-card">
+        <div class="block-card" onclick="highlightBlock(this)">
             <div class="card">
                 <div class="card-header">
                     <strong class="text-center">
@@ -78,6 +77,9 @@
                     </strong>
                     <div class="hash-txt">
                         <strong>Previous Hash:</strong> {{ block.previous_hash }}
+                    </div>
+                    <div class="hash-txt">
+                        <strong>Nonce:</strong> {{ block.nonce }}
                     </div>
                 </div>
                 <div class="card-body card-content">
@@ -98,10 +100,21 @@
                     </div>
                 </div>
             </div>
-
         </div>
         {% endfor %}
     </div>
 </div>
+
+<script>
+    function highlightBlock(element) {
+        // Remove highlight class from all block cards
+        document.querySelectorAll('.block-card').forEach(function (card) {
+            card.classList.remove('highlight');
+        });
+
+        // Add highlight class to the clicked block card
+        element.classList.add('highlight');
+    }
+</script>
 
 {% endblock %}

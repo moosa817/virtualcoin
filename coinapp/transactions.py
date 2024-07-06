@@ -64,9 +64,5 @@ def make_transaction(sender, receiver, amount, private_key):
 
     blockchain.add_transaction(transaction)
 
-    if blockchain.unconfirmed_transactions:
-        print("Block Pending")
-        return "Transaction Successful"
-    else:
-        print("Block Mined")
-        return "Transaction Successful"
+    # blockchain.unconfirmed_transactions:
+    return "Transaction Successful"

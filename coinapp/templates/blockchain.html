@@ -26,6 +26,13 @@
         cursor: pointer;
     }
 
+    .arrow {
+        position: absolute;
+        top: 50%;
+        left: 0%;
+
+    }
+
     .block-card.highlight {
         border-color: #007bff;
         box-shadow: 0px 0px 20px rgba(0, 123, 255, 0.5);
@@ -43,24 +50,8 @@
         font-size: 10px;
     }
 
-    .arrow-container {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        height: 100%;
-    }
-
-    .arrow {
-        position: absolute;
-        top: 50%;
-        width: 0;
-        height: 0;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-top: 5px solid #007bff;
-        transform-origin: top;
+    .list-group-item {
+        font-size: 12px;
     }
 
 </style>
@@ -69,6 +60,8 @@
     <h2 class="text-center mb-4">Blockchain Explorer</h2>
     <div class="block-row">
         {% for block in blocks %}
+
+
         <div class="block-card" onclick="highlightBlock(this)">
             <div class="card">
                 <div class="card-header">
@@ -76,7 +69,7 @@
                         Block #{{ block.index }}
                     </strong>
                     <div class="hash-txt">
-                        <strong>Previous Hash:</strong> {{ block.previous_hash }}
+                        <strong>Previous Hash:</strong> {{ block.previous_block.hash }}
                     </div>
                     <div class="hash-txt">
                         <strong>Nonce:</strong> {{ block.nonce }}
@@ -87,9 +80,15 @@
                     <ul class="list-group">
                         {% for transaction in block.transactions.all %}
                         <li class="list-group-item">
-                            <strong>Sender:</strong> {{ transaction.sender.username }}<br>
-                            <strong>Recipient:</strong> {{ transaction.recipient.username }}<br>
-                            <strong>Amount:</strong> {{ transaction.amount }}
+
+                            <div>
+                                <strong>Sender:</strong> {{ transaction.sender.username }}<br>
+                                <strong>Recipient:</strong> {{ transaction.recipient.username }}<br>
+                                <strong>Amount:</strong> {{ transaction.amount }} <br>
+                                <strong>Signature:</strong> <a class="sign" data-sign="{{ transaction.signature }}">Show
+                                    Signature</a>
+
+                            </div>
                         </li>
                         {% endfor %}
                     </ul>
@@ -100,7 +99,16 @@
                     </div>
                 </div>
             </div>
+
+
+            {%if not block.index == 0 %}
+            <div class="arrow">
+                ➡
+            </div>
+            {%endif%}
         </div>
+
+
         {% endfor %}
     </div>
 </div>
@@ -115,6 +123,20 @@
         // Add highlight class to the clicked block card
         element.classList.add('highlight');
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Select all elements with the class 'sign'
+        var signLinks = document.querySelectorAll('.sign');
+
+        // Add click event listener to each element
+        signLinks.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent the default action
+                var signature = link.getAttribute('data-sign'); // Get the data-sign attribute
+                alert('Signature: ' + signature); // Alert the signature
+            });
+        });
+    });
 </script>
 
 {% endblock %}

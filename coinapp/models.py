@@ -8,7 +8,7 @@ from django.utils import timezone
 
 class CustomUser(AbstractUser):
     email = models.EmailField(null=True, blank=True)
-    public_key = models.CharField(max_length=500)
+    public_key = models.TextField()
     is_new_user_setup_completed = models.BooleanField(default=False)
 
 
@@ -28,22 +28,44 @@ class Transaction(models.Model):
         return f"{self.sender.username}->{self.recipient.username}:{self.amount}"
 
 
+from django.db import models
+from django.utils import timezone
+import hashlib
+import json
+
+
 class Block(models.Model):
     index = models.IntegerField(unique=True)
-    previous_hash = models.CharField(max_length=64)
+    previous_block = models.ForeignKey(
+        "self",
+        on_delete=models.SET_NULL,
+        related_name="next_blocks",
+        null=True,
+        blank=True,
+    )
     timestamp = models.DateTimeField(default=timezone.now)
     nonce = models.IntegerField()
     hash = models.CharField(max_length=64, unique=True)
-    transactions = models.ManyToManyField(Transaction)
+    transactions = models.ManyToManyField("Transaction")
+
+    def save(self, *args, **kwargs):
+        # Save the block without transactions first to get an ID
+        if not self.pk:  # If the block hasn't been saved to the database yet
+            super().save(*args, **kwargs)
+
+        # Compute the hash and save the block again with transactions
+        self.hash = self.compute_hash()
+        super().save(*args, **kwargs)
 
     def compute_hash(self):
-        block_string = json.dumps(self.to_dict(), sort_keys=True)
+        block_dict = self.to_dict()
+        block_string = json.dumps(block_dict, sort_keys=True)
         return hashlib.sha256(block_string.encode()).hexdigest()
 
     def to_dict(self):
         return {
             "index": self.index,
-            "previous_hash": self.previous_hash,
+            "previous_hash": self.previous_block.hash if self.previous_block else None,
             "timestamp": str(self.timestamp),
             "nonce": self.nonce,
             "transactions": [str(tx.id) for tx in self.transactions.all()],

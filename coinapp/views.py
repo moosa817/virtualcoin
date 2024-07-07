@@ -64,7 +64,7 @@ def initial_setup(request):
 
         user = request.user
 
-        user.public_key = public_key
+        user.public_key = public_key.strip()
         user.is_new_user_setup_completed = True
         user.save()
         # initial balance
@@ -114,11 +114,13 @@ def make_transaction_view(request):
 
         try:
             receiver_user = CustomUser.objects.get(
-                Q(username=recipient) | Q(public_key=recipient.strip())
+                Q(username=recipient)
+                | Q(public_key=recipient.strip().replace("\r\n", "\n"))
             )
-        except CustomUser.DoesNotExist:
-            receiver = None
-        if response == "Transaction Successful":
+        except:
+            receiver_user = None
+
+        if response == "Transaction Successful" and receiver_user:
             messages.success(
                 request, f"Sent {amount} Coins to {receiver_user} successfully"
             )

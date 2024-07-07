@@ -29,11 +29,13 @@ def has_sufficient_balance(amount, user):
 
 def make_transaction(sender, receiver, amount, private_key):
     sender_user = CustomUser.objects.get(username=sender)
+    receiver = receiver.strip().replace("\r\n", "\n")
+
     try:
         receiver_user = CustomUser.objects.get(
-            Q(username=receiver) | Q(public_key=receiver.strip())
+            Q(username=receiver) | Q(public_key=receiver)
         )
-    except CustomUser.DoesNotExist:
+    except:
         return "Invalid Receiver"
 
     amount = float(amount)

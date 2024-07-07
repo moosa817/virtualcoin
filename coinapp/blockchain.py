@@ -31,13 +31,15 @@ class Blockchain:
         last_hash = last_block.hash if last_block else "0"
         new_block = Block(
             index=last_block.index + 1 if last_block else 0,
-            previous_hash=last_hash,
+            previous_block=last_block,
             nonce=0,
         )
 
+        # Save the block first to get its ID
+        new_block.save()
+
         # Add up to block_size transactions to the new block
         transactions_to_include = self.unconfirmed_transactions[: Blockchain.block_size]
-        new_block.save()  # Save the block first to get its ID
         new_block.transactions.set(transactions_to_include)
 
         while not self.is_valid_nonce(new_block):
@@ -57,5 +59,4 @@ class Blockchain:
         return guess_hash.startswith("0" * Blockchain.difficulty)
 
     def compute_hash(self, block):
-        block_string = json.dumps(block.to_dict(), sort_keys=True)
-        return hashlib.sha256(block_string.encode()).hexdigest()
+        return block.compute_hash()

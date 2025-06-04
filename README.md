@@ -4,6 +4,9 @@
 
  Video Demo: https://youtu.be/VMQjynSVoyM
 
+##NOTE
+University Project collaborated by Muhammad Moosa (moosa817) and Ammar Munnawar (ammar-munawar)
+
 ## Project Description
 VirtualCoin is a prototype cryptocurrency application built to showcase how blockchain technology with transactions works. The application demonstrates the fundamental principles of blockchain, including block creation, transaction handling, and secure signing. Users can sign up, log in, make transactions, and explore the blockchain through a user-friendly interface.
 

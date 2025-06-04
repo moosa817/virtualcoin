@@ -4,7 +4,7 @@
 
  Video Demo: https://youtu.be/VMQjynSVoyM
 
-##NOTE
+## NOTE
 University Project collaborated by Muhammad Moosa (moosa817) and Ammar Munnawar (ammar-munawar)
 
 ## Project Description
